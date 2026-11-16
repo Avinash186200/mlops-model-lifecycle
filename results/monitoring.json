@@ -1,0 +1,512 @@
+{
+  "reference": "training window of v1 (months 0-4)",
+  "alerts": {
+    "psi_feature": 0.2,
+    "psi_prediction": 0.2,
+    "auc_drop": 0.03,
+    "ece_max": 0.05
+  },
+  "by_month": [
+    {
+      "month": 6,
+      "psi": {
+        "tenure_months": 0.0016,
+        "monthly_charges": 0.0015,
+        "usage_hours": 0.0067,
+        "support_calls": 0.0025,
+        "payment_delay_days": 0.0025,
+        "num_products": 0.0002,
+        "discount_pct": 0.0,
+        "contract": 0.0005,
+        "region": 0.0003
+      },
+      "ks": {
+        "tenure_months": 0.0094,
+        "monthly_charges": 0.0125,
+        "usage_hours": 0.0159,
+        "support_calls": 0.0218,
+        "payment_delay_days": 0.0124,
+        "num_products": 0.0064,
+        "discount_pct": 0.0052
+      },
+      "prediction_psi": 0.0035,
+      "lagged_auc": 0.8053,
+      "alerts": []
+    },
+    {
+      "month": 7,
+      "psi": {
+        "tenure_months": 0.005,
+        "monthly_charges": 0.0035,
+        "usage_hours": 0.003,
+        "support_calls": 0.0007,
+        "payment_delay_days": 0.0041,
+        "num_products": 0.0027,
+        "discount_pct": 0.0006,
+        "contract": 0.0007,
+        "region": 0.0002
+      },
+      "ks": {
+        "tenure_months": 0.023,
+        "monthly_charges": 0.0212,
+        "usage_hours": 0.014,
+        "support_calls": 0.0103,
+        "payment_delay_days": 0.0211,
+        "num_products": 0.0229,
+        "discount_pct": 0.0121
+      },
+      "prediction_psi": 0.0063,
+      "lagged_auc": 0.791,
+      "alerts": []
+    },
+    {
+      "month": 8,
+      "psi": {
+        "tenure_months": 0.0035,
+        "monthly_charges": 0.0034,
+        "usage_hours": 0.0045,
+        "support_calls": 0.0015,
+        "payment_delay_days": 0.0028,
+        "num_products": 0.0,
+        "discount_pct": 0.0002,
+        "contract": 0.001,
+        "region": 0.001
+      },
+      "ks": {
+        "tenure_months": 0.0144,
+        "monthly_charges": 0.0169,
+        "usage_hours": 0.0158,
+        "support_calls": 0.0114,
+        "payment_delay_days": 0.014,
+        "num_products": 0.0034,
+        "discount_pct": 0.0067
+      },
+      "prediction_psi": 0.0044,
+      "lagged_auc": 0.7972,
+      "alerts": []
+    },
+    {
+      "month": 9,
+      "psi": {
+        "tenure_months": 0.002,
+        "monthly_charges": 0.0025,
+        "usage_hours": 1.017,
+        "support_calls": 0.0005,
+        "payment_delay_days": 0.0029,
+        "num_products": 0.0008,
+        "discount_pct": 0.0001,
+        "contract": 0.0006,
+        "region": 0.0025
+      },
+      "ks": {
+        "tenure_months": 0.0143,
+        "monthly_charges": 0.0189,
+        "usage_hours": 0.4097,
+        "support_calls": 0.0103,
+        "payment_delay_days": 0.0199,
+        "num_products": 0.0087,
+        "discount_pct": 0.0054
+      },
+      "prediction_psi": 0.161,
+      "lagged_auc": 0.7919,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 10,
+      "psi": {
+        "tenure_months": 0.0027,
+        "monthly_charges": 0.0032,
+        "usage_hours": 0.9824,
+        "support_calls": 0.0019,
+        "payment_delay_days": 0.0005,
+        "num_products": 0.0017,
+        "discount_pct": 0.0005,
+        "contract": 0.0014,
+        "region": 0.0008
+      },
+      "ks": {
+        "tenure_months": 0.0203,
+        "monthly_charges": 0.0205,
+        "usage_hours": 0.3989,
+        "support_calls": 0.019,
+        "payment_delay_days": 0.0085,
+        "num_products": 0.0177,
+        "discount_pct": 0.0107
+      },
+      "prediction_psi": 0.1441,
+      "lagged_auc": 0.7991,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 11,
+      "psi": {
+        "tenure_months": 0.0024,
+        "monthly_charges": 0.0026,
+        "usage_hours": 0.9044,
+        "support_calls": 0.0011,
+        "payment_delay_days": 0.0035,
+        "num_products": 0.0,
+        "discount_pct": 0.0002,
+        "contract": 0.0016,
+        "region": 0.0004
+      },
+      "ks": {
+        "tenure_months": 0.0104,
+        "monthly_charges": 0.0165,
+        "usage_hours": 0.381,
+        "support_calls": 0.0126,
+        "payment_delay_days": 0.0099,
+        "num_products": 0.005,
+        "discount_pct": 0.0077
+      },
+      "prediction_psi": 0.1514,
+      "lagged_auc": 0.8163,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 12,
+      "psi": {
+        "tenure_months": 0.0018,
+        "monthly_charges": 0.0016,
+        "usage_hours": 0.9696,
+        "support_calls": 0.0009,
+        "payment_delay_days": 0.0026,
+        "num_products": 0.0001,
+        "discount_pct": 0.0005,
+        "contract": 0.0006,
+        "region": 0.001
+      },
+      "ks": {
+        "tenure_months": 0.0143,
+        "monthly_charges": 0.0122,
+        "usage_hours": 0.3988,
+        "support_calls": 0.0133,
+        "payment_delay_days": 0.0127,
+        "num_products": 0.0132,
+        "discount_pct": 0.0111
+      },
+      "prediction_psi": 0.1565,
+      "lagged_auc": 0.8106,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 13,
+      "psi": {
+        "tenure_months": 0.0028,
+        "monthly_charges": 0.0051,
+        "usage_hours": 1.0045,
+        "support_calls": 0.0016,
+        "payment_delay_days": 0.0045,
+        "num_products": 0.0004,
+        "discount_pct": 0.0004,
+        "contract": 0.0007,
+        "region": 0.0016
+      },
+      "ks": {
+        "tenure_months": 0.0091,
+        "monthly_charges": 0.0257,
+        "usage_hours": 0.4083,
+        "support_calls": 0.0177,
+        "payment_delay_days": 0.0261,
+        "num_products": 0.01,
+        "discount_pct": 0.0094
+      },
+      "prediction_psi": 0.163,
+      "lagged_auc": 0.8188,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 14,
+      "psi": {
+        "tenure_months": 0.006,
+        "monthly_charges": 0.0022,
+        "usage_hours": 1.0179,
+        "support_calls": 0.0012,
+        "payment_delay_days": 0.0014,
+        "num_products": 0.0005,
+        "discount_pct": 0.0001,
+        "contract": 0.0013,
+        "region": 0.0015
+      },
+      "ks": {
+        "tenure_months": 0.0212,
+        "monthly_charges": 0.012,
+        "usage_hours": 0.4102,
+        "support_calls": 0.0097,
+        "payment_delay_days": 0.0131,
+        "num_products": 0.0097,
+        "discount_pct": 0.0076
+      },
+      "prediction_psi": 0.1913,
+      "lagged_auc": 0.8023,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 15,
+      "psi": {
+        "tenure_months": 0.0027,
+        "monthly_charges": 0.0039,
+        "usage_hours": 1.012,
+        "support_calls": 0.0022,
+        "payment_delay_days": 0.0028,
+        "num_products": 0.001,
+        "discount_pct": 0.0003,
+        "contract": 0.0004,
+        "region": 0.001
+      },
+      "ks": {
+        "tenure_months": 0.0109,
+        "monthly_charges": 0.0136,
+        "usage_hours": 0.3867,
+        "support_calls": 0.0177,
+        "payment_delay_days": 0.0148,
+        "num_products": 0.0148,
+        "discount_pct": 0.0093
+      },
+      "prediction_psi": 0.1586,
+      "lagged_auc": 0.8107,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 16,
+      "psi": {
+        "tenure_months": 0.0018,
+        "monthly_charges": 0.0063,
+        "usage_hours": 0.9929,
+        "support_calls": 0.0022,
+        "payment_delay_days": 0.0028,
+        "num_products": 0.0001,
+        "discount_pct": 0.0001,
+        "contract": 0.0019,
+        "region": 0.0025
+      },
+      "ks": {
+        "tenure_months": 0.0122,
+        "monthly_charges": 0.0296,
+        "usage_hours": 0.4062,
+        "support_calls": 0.0181,
+        "payment_delay_days": 0.0156,
+        "num_products": 0.0078,
+        "discount_pct": 0.0047
+      },
+      "prediction_psi": 0.1479,
+      "lagged_auc": 0.7843,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 17,
+      "psi": {
+        "tenure_months": 0.0028,
+        "monthly_charges": 0.0034,
+        "usage_hours": 0.9696,
+        "support_calls": 0.0001,
+        "payment_delay_days": 0.0071,
+        "num_products": 0.0008,
+        "discount_pct": 0.0,
+        "contract": 0.0008,
+        "region": 0.0022
+      },
+      "ks": {
+        "tenure_months": 0.0142,
+        "monthly_charges": 0.0166,
+        "usage_hours": 0.3998,
+        "support_calls": 0.0056,
+        "payment_delay_days": 0.0275,
+        "num_products": 0.011,
+        "discount_pct": 0.0034
+      },
+      "prediction_psi": 0.1622,
+      "lagged_auc": 0.7771,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 18,
+      "psi": {
+        "tenure_months": 0.0054,
+        "monthly_charges": 0.0016,
+        "usage_hours": 0.9487,
+        "support_calls": 0.002,
+        "payment_delay_days": 0.0027,
+        "num_products": 0.0005,
+        "discount_pct": 0.0,
+        "contract": 0.0007,
+        "region": 0.0008
+      },
+      "ks": {
+        "tenure_months": 0.0256,
+        "monthly_charges": 0.0128,
+        "usage_hours": 0.3956,
+        "support_calls": 0.0163,
+        "payment_delay_days": 0.0103,
+        "num_products": 0.0111,
+        "discount_pct": 0.0022
+      },
+      "prediction_psi": 0.1791,
+      "lagged_auc": 0.7916,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 19,
+      "psi": {
+        "tenure_months": 0.0043,
+        "monthly_charges": 0.0028,
+        "usage_hours": 1.0146,
+        "support_calls": 0.0002,
+        "payment_delay_days": 0.0017,
+        "num_products": 0.0002,
+        "discount_pct": 0.0021,
+        "contract": 0.0006,
+        "region": 0.0003
+      },
+      "ks": {
+        "tenure_months": 0.0156,
+        "monthly_charges": 0.0166,
+        "usage_hours": 0.4064,
+        "support_calls": 0.0044,
+        "payment_delay_days": 0.0117,
+        "num_products": 0.0071,
+        "discount_pct": 0.0222
+      },
+      "prediction_psi": 0.1564,
+      "lagged_auc": 0.7719,
+      "alerts": [
+        "feature_drift:usage_hours",
+        "performance:auc"
+      ]
+    },
+    {
+      "month": 20,
+      "psi": {
+        "tenure_months": 0.0037,
+        "monthly_charges": 0.005,
+        "usage_hours": 0.936,
+        "support_calls": 0.0001,
+        "payment_delay_days": 0.0023,
+        "num_products": 0.0016,
+        "discount_pct": 0.0013,
+        "contract": 0.0032,
+        "region": 0.001
+      },
+      "ks": {
+        "tenure_months": 0.021,
+        "monthly_charges": 0.0107,
+        "usage_hours": 0.3932,
+        "support_calls": 0.0026,
+        "payment_delay_days": 0.0116,
+        "num_products": 0.0167,
+        "discount_pct": 0.0175
+      },
+      "prediction_psi": 0.1749,
+      "lagged_auc": 0.7968,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    },
+    {
+      "month": 21,
+      "psi": {
+        "tenure_months": 0.0056,
+        "monthly_charges": 0.0046,
+        "usage_hours": 1.1134,
+        "support_calls": 0.0013,
+        "payment_delay_days": 0.0023,
+        "num_products": 0.0002,
+        "discount_pct": 0.0,
+        "contract": 0.0001,
+        "region": 0.001
+      },
+      "ks": {
+        "tenure_months": 0.0198,
+        "monthly_charges": 0.0137,
+        "usage_hours": 0.4244,
+        "support_calls": 0.0153,
+        "payment_delay_days": 0.0155,
+        "num_products": 0.0054,
+        "discount_pct": 0.0062
+      },
+      "prediction_psi": 0.186,
+      "lagged_auc": 0.7736,
+      "alerts": [
+        "feature_drift:usage_hours",
+        "performance:auc"
+      ]
+    },
+    {
+      "month": 22,
+      "psi": {
+        "tenure_months": 0.008,
+        "monthly_charges": 0.002,
+        "usage_hours": 0.9481,
+        "support_calls": 0.002,
+        "payment_delay_days": 0.0051,
+        "num_products": 0.0002,
+        "discount_pct": 0.0001,
+        "contract": 0.0004,
+        "region": 0.0014
+      },
+      "ks": {
+        "tenure_months": 0.0205,
+        "monthly_charges": 0.0128,
+        "usage_hours": 0.3972,
+        "support_calls": 0.0128,
+        "payment_delay_days": 0.0209,
+        "num_products": 0.007,
+        "discount_pct": 0.0057
+      },
+      "prediction_psi": 0.1553,
+      "lagged_auc": 0.7675,
+      "alerts": [
+        "feature_drift:usage_hours",
+        "performance:auc"
+      ]
+    },
+    {
+      "month": 23,
+      "psi": {
+        "tenure_months": 0.0035,
+        "monthly_charges": 0.0016,
+        "usage_hours": 0.9054,
+        "support_calls": 0.0002,
+        "payment_delay_days": 0.0023,
+        "num_products": 0.0004,
+        "discount_pct": 0.0001,
+        "contract": 0.0,
+        "region": 0.0016
+      },
+      "ks": {
+        "tenure_months": 0.0177,
+        "monthly_charges": 0.0109,
+        "usage_hours": 0.3905,
+        "support_calls": 0.003,
+        "payment_delay_days": 0.0108,
+        "num_products": 0.0053,
+        "discount_pct": 0.0103
+      },
+      "prediction_psi": 0.1542,
+      "lagged_auc": 0.7883,
+      "alerts": [
+        "feature_drift:usage_hours"
+      ]
+    }
+  ]
+}

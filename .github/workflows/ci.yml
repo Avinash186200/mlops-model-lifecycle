@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Unit, API, smoke and reproducibility tests
+        run: pytest -q
+
+  train-gate-register:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Train, gate and register on tiny data
+        run: python -m mlcycle.cli pipeline --artifacts /tmp/ci
+      - name: Show the audit log
+        run: cat /tmp/ci/ci-registry/audit.jsonl
+      - name: Full lifecycle on tiny data
+        run: python -m mlcycle.cli run-all --tiny --out /tmp/results --artifacts /tmp/artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tiny-results
+          path: /tmp/results

@@ -1,0 +1,241 @@
+{
+  "gate_thresholds": {
+    "min_auc_gain": 0.005,
+    "max_ece": 0.05,
+    "max_rows_dropped": 0.05
+  },
+  "steps": [
+    {
+      "step": "promote logreg baseline (no production yet)",
+      "candidate": 1,
+      "production_before": null,
+      "passed": true,
+      "checks": {
+        "schema": true,
+        "beats_production": true,
+        "calibration": true
+      },
+      "auc_gain": null,
+      "candidate_auc": 0.7945,
+      "candidate_ece": 0.0139,
+      "production_auc": null
+    },
+    {
+      "step": "promote gbm over logreg",
+      "candidate": 2,
+      "production_before": 1,
+      "passed": true,
+      "checks": {
+        "schema": true,
+        "beats_production": true,
+        "calibration": true
+      },
+      "auc_gain": 0.0108,
+      "candidate_auc": 0.8053,
+      "candidate_ece": 0.0115,
+      "production_auc": 0.7945
+    },
+    {
+      "step": "gbm with class_weight=balanced",
+      "candidate": 3,
+      "production_before": 2,
+      "passed": false,
+      "checks": {
+        "schema": true,
+        "beats_production": false,
+        "calibration": false
+      },
+      "auc_gain": -0.0025,
+      "candidate_auc": 0.8028,
+      "candidate_ece": 0.2137,
+      "production_auc": 0.8053
+    },
+    {
+      "step": "gbm trained on 2 months",
+      "candidate": 4,
+      "production_before": 2,
+      "passed": false,
+      "checks": {
+        "schema": true,
+        "beats_production": false,
+        "calibration": true
+      },
+      "auc_gain": -0.0048,
+      "candidate_auc": 0.8005,
+      "candidate_ece": 0.0172,
+      "production_auc": 0.8053
+    },
+    {
+      "step": "gbm on a holdout feed with 10% unknown contract values",
+      "candidate": 5,
+      "production_before": 2,
+      "passed": false,
+      "checks": {
+        "schema": false,
+        "beats_production": false,
+        "calibration": true
+      },
+      "auc_gain": 0.0,
+      "candidate_auc": 0.8027,
+      "candidate_ece": 0.0136,
+      "production_auc": 0.8027
+    },
+    {
+      "step": "re-promote gbm after the rollback",
+      "candidate": 2,
+      "production_before": 1,
+      "passed": true,
+      "checks": {
+        "schema": true,
+        "beats_production": true,
+        "calibration": true
+      },
+      "auc_gain": 0.0108,
+      "candidate_auc": 0.8053,
+      "candidate_ece": 0.0115,
+      "production_auc": 0.7945
+    }
+  ],
+  "rollback_to": 1,
+  "final_production": 2,
+  "versions": {
+    "1": {
+      "stage": "archived",
+      "model_type": "logreg"
+    },
+    "2": {
+      "stage": "production",
+      "model_type": "gbm"
+    },
+    "3": {
+      "stage": "archived",
+      "model_type": "gbm"
+    },
+    "4": {
+      "stage": "archived",
+      "model_type": "gbm"
+    },
+    "5": {
+      "stage": "archived",
+      "model_type": "gbm"
+    }
+  },
+  "audit_log": [
+    {
+      "at": "step-1",
+      "event": "register",
+      "model": "churn",
+      "version": 1
+    },
+    {
+      "at": "step-1",
+      "auc_gain": null,
+      "checks": {
+        "beats_production": true,
+        "calibration": true,
+        "schema": true
+      },
+      "event": "promote",
+      "forced": false,
+      "model": "churn",
+      "replaced": null,
+      "version": 1
+    },
+    {
+      "at": "step-2",
+      "event": "register",
+      "model": "churn",
+      "version": 2
+    },
+    {
+      "at": "step-2",
+      "auc_gain": 0.0108,
+      "checks": {
+        "beats_production": true,
+        "calibration": true,
+        "schema": true
+      },
+      "event": "promote",
+      "forced": false,
+      "model": "churn",
+      "replaced": 1,
+      "version": 2
+    },
+    {
+      "at": "step-3",
+      "event": "register",
+      "model": "churn",
+      "version": 3
+    },
+    {
+      "at": "step-3",
+      "auc_gain": -0.0025,
+      "checks": {
+        "beats_production": false,
+        "calibration": false,
+        "schema": true
+      },
+      "event": "reject",
+      "model": "churn",
+      "version": 3
+    },
+    {
+      "at": "step-4",
+      "event": "register",
+      "model": "churn",
+      "version": 4
+    },
+    {
+      "at": "step-4",
+      "auc_gain": -0.0048,
+      "checks": {
+        "beats_production": false,
+        "calibration": true,
+        "schema": true
+      },
+      "event": "reject",
+      "model": "churn",
+      "version": 4
+    },
+    {
+      "at": "step-5",
+      "event": "register",
+      "model": "churn",
+      "version": 5
+    },
+    {
+      "at": "step-5",
+      "auc_gain": 0.0,
+      "checks": {
+        "beats_production": false,
+        "calibration": true,
+        "schema": false
+      },
+      "event": "reject",
+      "model": "churn",
+      "version": 5
+    },
+    {
+      "at": "step-6",
+      "event": "rollback",
+      "model": "churn",
+      "reason": "simulated incident: score distribution jumped after release",
+      "replaced": 2,
+      "version": 1
+    },
+    {
+      "at": "step-7",
+      "auc_gain": 0.0108,
+      "checks": {
+        "beats_production": true,
+        "calibration": true,
+        "schema": true
+      },
+      "event": "promote",
+      "forced": false,
+      "model": "churn",
+      "replaced": 1,
+      "version": 2
+    }
+  ]
+}
