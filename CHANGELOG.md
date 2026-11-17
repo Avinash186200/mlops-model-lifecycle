@@ -4,6 +4,19 @@ All notable changes are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project
 uses [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-11-17
+
+### Added
+
+- `scheduler.py`: a scheduled runner for the churn model. Daily scoring, weekly refit through the promotion gate,
+  feed freshness check that fails closed, idempotent run markers, a lock against overlapping runs, retries capped
+  per day, heartbeat plus an outside `health_check`, and alerts to a JSONL file and optional sinks (webhook from an
+  environment variable). Time comes from an injected clock; `simulate` replays weeks on a simulated clock.
+- CLI `python -m mlcycle.cli schedule {simulate,run-once,health}`.
+- `tests/test_scheduler.py`: simulated-clock tests for idempotency, freshness, lock, refit cadence, failure and
+  retry, health, and a reproducible replay.
+- `docs/scheduled-runner.md` and `docs/ml-lifecycle-checklist.md`.
+
 ## [0.1.0] - 2026-11-16
 
 ### Added

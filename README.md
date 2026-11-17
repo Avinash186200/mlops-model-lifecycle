@@ -103,6 +103,21 @@ curl -s -X POST localhost:8000/predict -H 'content-type: application/json' -d '{
 
 Docker: `docker build -t mlcycle-api .` then `docker run -p 8000:8000 -v "$PWD/artifacts/registry:/registry:ro" mlcycle-api`. See [docs/serving.md](docs/serving.md) for what I ran locally.
 
+## Scheduled runner
+
+`scheduler.py` runs the production model as a daily job: score once a day, refit weekly through the promotion gate,
+check the feed is fresh before doing anything, write a heartbeat, alert on failure, and never run the same day twice.
+Time is injected, so a 42-day replay with a planted feed outage and a crash runs in seconds and gives the same
+result every time. Details: [docs/scheduled-runner.md](docs/scheduled-runner.md).
+
+```bash
+python -m mlcycle.cli schedule simulate --days 42 --state /tmp/runner   # replay six weeks on a simulated clock
+python -m mlcycle.cli schedule run-once --state /tmp/runner             # one daily run (idempotent)
+python -m mlcycle.cli schedule health --state /tmp/runner               # exit 1 if the heartbeat is stale
+```
+
+For the whole workflow from data to retirement, see the [ML lifecycle checklist](docs/ml-lifecycle-checklist.md).
+
 ## Repo layout
 
 ```
@@ -115,13 +130,15 @@ src/mlcycle/
   serving.py      FastAPI app and SQLite prediction log
   monitoring.py   PSI, KS, alert rules
   simulate.py     the month-by-month policy simulation
+  scheduler.py    daily runner: freshness check, weekly refit, idempotent runs, lock, heartbeat, alerts
   tracking.py     optional MLflow logging
   bench.py        runs every stage and writes results/
   report.py       renders results/RESULTS.md
-  cli.py          python -m mlcycle.cli {run-all,pipeline,serve}
+  cli.py          python -m mlcycle.cli {run-all,pipeline,serve,schedule}
 tests/            one test file per component, API test, pipeline smoke and reproducibility tests
 results/          JSON per stage + RESULTS.md
-docs/             methodology, registry, monitoring, retraining, serving, walkthrough, interview notes, production
+docs/             methodology, registry, monitoring, retraining, serving, scheduled runner, lifecycle checklist,
+                  walkthrough, interview notes, production
 Dockerfile        scoring API image
 .github/workflows/ci.yml   tests, then a tiny train -> gate -> register job
 ```

@@ -74,7 +74,7 @@ def create_app(registry_dir: str | Path, model_name: str = "churn", log_path: st
         state.update(version=version, model=model, card=card)
 
     load()
-    app = FastAPI(title="churn scoring", version="0.1.0")
+    app = FastAPI(title="churn scoring", version="0.2.0")
     app.state.log = log
 
     @app.get("/health")

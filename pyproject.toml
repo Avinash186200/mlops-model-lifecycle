@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mlcycle"
-version = "0.1.0"
+version = "0.2.0"
 description = "A local end-to-end model lifecycle for a churn model: validation, training, packaging, a file registry with promotion gates, a FastAPI scoring service, drift monitoring and a comparison of retraining policies."
 readme = "README.md"
 license = {text = "MIT"}
