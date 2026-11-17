@@ -81,7 +81,7 @@ What this shows, honestly:
 
 1. **The feature shift was not worth retraining for.** PSI on `usage_hours` jumped from under 0.01 to about 1.0 at month 9, and AUC did not move (0.799 to 0.819 over months 9-13). Every candidate trained on the new data in months 9-13 failed the "beats production" gate. A drift alert on its own is not a reason to ship a new model, and the gate is what stopped five pointless releases.
 2. **The concept shift was what hurt, and feature drift monitoring could not see it.** The rival plan changed what the features mean, not how they are distributed. v1 fell from 0.804 to 0.780 mean AUC after month 15. The drift-triggered policy only caught it through the performance alert at month 19, four months late, because labels arrive a month late and the AUC loss had to cross 0.03.
-3. **Monthly retraining won on accuracy here.** It promoted a new model at months 17 to 21 and reached 0.85 AUC by month 20, versus 0.77-0.80 for the old model. It cost 17 training runs; the gate rejected 11 of them because they were no better.
+3. **Monthly retraining won on accuracy here.** It promoted a new model at the end of month 14 and of months 17 to 21, and reached 0.85 AUC by month 20, versus 0.77-0.80 for the old model. It cost 17 training runs; the gate rejected 11 of them because they were no better.
 4. **Drift-triggered was the middle ground.** 6 retrains for most of the gain once it reacted (0.858 at month 20). Its weakness was the slow reaction to a concept shift.
 5. **Alerts for the never policy were "right for the wrong reason".** From month 14 most of its feature-drift alerts count as true, but the cause of the loss was the concept shift, not the usage drift that fired the alert.
 
@@ -146,7 +146,7 @@ Dockerfile        scoring API image
 ## Limits
 
 - **Synthetic data.** The shifts are planted and clean: one feature moves at one month, the concept changes at one month. Real drift is gradual, mixed and has seasonality. The numbers are about this data; the shape of the trade-offs is what transfers.
-- **One seed.** Month-to-month AUC noise is about ±0.01 at 3,000 rows. The gaps between policies after month 17 (0.03-0.08) are well above that; the small differences before it are not.
+- **One seed.** Month-to-month AUC noise is about ±0.01 at 3,000 rows. The gap between monthly and never retraining after month 17 (0.03-0.09) is well above that. The gap between monthly and drift-triggered retraining from month 20 (0.00-0.02), and the differences before month 17, are not.
 - **Alert truth is my definition** (a 0.02 AUC loss on the next month). A different threshold changes the true/false counts.
 - **The drift policy re-baselines its reference** after a rejected candidate, so a checked shift does not fire every month. Without that it would retrain every month during the feature shift, the same as monthly.
 - **Retraining is cheap here.** Seconds per model. With hours of GPU time or a human review per release, the cost column matters much more than it does in this table.
