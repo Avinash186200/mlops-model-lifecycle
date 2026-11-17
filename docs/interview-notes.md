@@ -39,7 +39,7 @@ When a drift-triggered candidate is rejected, I move the drift reference to the 
 A gate with three checks on a holdout month neither model trained on: beat production AUC by at least 0.005, ECE at most 0.05, and the feed passes the schema checks. All three must pass.
 
 **Give an example where the gate mattered.**
-A gradient boosting model with balanced class weights had AUC 0.803, within 0.003 of production. Its ECE was 0.214, because class weights inflate the probabilities. An AUC-only gate would have shipped it. The calibration gate blocked it.
+A gradient boosting model with balanced class weights had AUC 0.803, within 0.003 of production. Its ECE was 0.214, because class weights inflate the probabilities. It also missed the AUC bar (-0.0025 against +0.005), but only the calibration check shows what actually broke.
 
 **And the schema gate?**
 I fed a holdout with 10% unknown contract values. The bad rows get dropped before scoring, so the AUC still looked fine. The schema check caught that 10% of the feed was broken, above my 5% limit.
@@ -69,4 +69,4 @@ sklearn's HistGradientBoosting is the same idea and keeps the install small. For
 ## Honesty
 
 **What would you not claim from this?**
-That monthly retraining is always best. The shifts are planted step changes on synthetic data with one seed. Monthly AUC noise is about ±0.01, so I trust the big gaps after month 17 (0.03-0.09) and not the small ones before. The true/false alert counts depend on my own definition of a real loss (0.02 AUC on the next month).
+That monthly retraining is always best. The shifts are planted step changes on synthetic data with one seed. Monthly AUC noise is about ±0.01, so I trust the gap between monthly and never retraining after month 17 (0.03-0.09), not the gap between monthly and drift-triggered retraining from month 20 (0.00-0.02) or the differences up to month 17. The true/false alert counts depend on my own definition of a real loss (0.02 AUC on the next month).

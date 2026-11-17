@@ -63,7 +63,7 @@ A candidate goes to production only if it beats production AUC by at least 0.005
 | v4 gradient boosting on 2 months only | 0.800 | -0.0048 | 0.017 | pass | FAIL | pass | rejected |
 | v5 retrain, holdout feed with 10% unknown contracts | 0.803 | 0.0000 | 0.014 | FAIL | FAIL | pass | rejected |
 
-Then a simulated incident: rollback put v1 back in one call, and v2 was promoted again through the same gate. All of it is in the audit log. v3 is the case I care most about: its ranking is nearly as good, but class weights inflate its probabilities and its ECE is 0.214. An AUC-only gate would have let it through.
+Then a simulated incident: rollback put v1 back in one call, and v2 was promoted again through the same gate. All of it is in the audit log. v3 is the case I care most about: its ranking is nearly as good, but class weights inflate its probabilities and its ECE is 0.214. It also missed the AUC bar (-0.0025 against +0.005), but only the calibration check shows what actually broke.
 
 ### Retraining policies (the headline)
 
@@ -146,7 +146,7 @@ Dockerfile        scoring API image
 ## Limits
 
 - **Synthetic data.** The shifts are planted and clean: one feature moves at one month, the concept changes at one month. Real drift is gradual, mixed and has seasonality. The numbers are about this data; the shape of the trade-offs is what transfers.
-- **One seed.** Month-to-month AUC noise is about ±0.01 at 3,000 rows. The gap between monthly and never retraining after month 17 (0.03-0.09) is well above that. The gap between monthly and drift-triggered retraining from month 20 (0.00-0.02), and the differences before month 17, are not.
+- **One seed.** Month-to-month AUC noise is about ±0.01 at 3,000 rows. The gap between monthly and never retraining after month 17 (0.03-0.09) is well above that. The gap between monthly and drift-triggered retraining from month 20 (0.00-0.02), and the differences up to month 17, are not.
 - **Alert truth is my definition** (a 0.02 AUC loss on the next month). A different threshold changes the true/false counts.
 - **The drift policy re-baselines its reference** after a rejected candidate, so a checked shift does not fire every month. Without that it would retrain every month during the feature shift, the same as monthly.
 - **Retraining is cheap here.** Seconds per model. With hours of GPU time or a human review per release, the cost column matters much more than it does in this table.
